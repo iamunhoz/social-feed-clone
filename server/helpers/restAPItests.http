@@ -1,0 +1,68 @@
+### This file containts http requests for testing purposes
+### It was made to be used on vs-code with 'Rest Client' extension installed
+
+###variables
+@server = http://127.0.0.1:3001
+
+### fetches for HOMEPAGE
+GET {{server}}
+
+### fetches /signin page
+GET {{server}}/signup
+
+### create user1 - must fail if it already exists.
+POST {{server}}/api/users HTTP/1.1
+content-type: application/json
+
+{
+    "name": "ze pilintra",
+    "email": "zepilintra@bol.com",
+    "password": "123321"
+}
+### create user2 - must fail if it already exists.
+POST {{server}}/api/users HTTP/1.1
+content-type: application/json
+
+{
+    "name": "ojuara",
+    "email": "ojuara@bol.com",
+    "password": "123321"
+}
+
+### fetches for a list of users
+GET {{server}}/api/users
+
+### fetches for a single user and must fail because requires auth token in header
+GET {{server}}/api/users/60941f8b2bb02d1b77cac570
+
+### sign-in operation
+POST {{server}}/auth/signin HTTP/1.1
+content-type: application/json
+
+{
+    "email": "ojuara@bol.com",
+    "password": "123321"
+}
+
+### fetches for user 'ojuara' and must succeed because auth token is in header
+GET {{server}}/api/users/60941f8b2bb02d1b77cac570
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk0MWY4YjJiYjAyZDFiNzdjYWM1NzAiLCJpYXQiOjE2MjAzMjEwODB9.yUrCL14Mv2xy3PHyEicLEjrydFbvuoUbSxk_drgzpxo
+
+### delete user
+DELETE {{server}}/api/users/60941f8b2bb02d1b77cac570 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk0MWY4YjJiYjAyZDFiNzdjYWM1NzAiLCJpYXQiOjE2MjAzMjEwODB9.yUrCL14Mv2xy3PHyEicLEjrydFbvuoUbSxk_drgzpxo
+
+### update user ojuara
+PUT {{server}}/api/users/60941f8b2bb02d1b77cac570
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk0MWY4YjJiYjAyZDFiNzdjYWM1NzAiLCJpYXQiOjE2MjAzMjEwODB9.yUrCL14Mv2xy3PHyEicLEjrydFbvuoUbSxk_drgzpxo
+
+{
+    "name": "Arauja Ojuara"
+}
+### sign out
+GET {{server}}/auth/signout HTTP/1.1
+
+### asks -only- for /dist/bundle.js (express test)
+GET {{server}}/dist/bundle.js HTTP/1.1
+
