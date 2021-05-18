@@ -27,6 +27,12 @@ const useStyles = makeStyles(theme => ({
 	title: {
 		marginTop: theme.spacing(3),
 		color: theme.palette.protectedTitle
+	},
+	about: {
+		fontStyle: 'italic'
+	},
+	userInfo: {
+		maxWidth: '110px'
 	}
 }))
 
@@ -70,7 +76,8 @@ export default function Profile({ match }) {
 								<Person />
 							</Avatar>
 						</ListItemAvatar>
-						<ListItemText primary={user.name} secondary={user.email} />
+						<ListItemText primary={user.name} secondary={user.email} className={classes.userInfo} />
+						<ListItemText primary={user.about} className={classes.about} />
 						{ auth.isAuthenticated().user && auth.isAuthenticated().user._id === user._id &&
 							(<ListItemSecondaryAction>
 								<Link to={'/user/edit/' + user._id}>
@@ -84,7 +91,7 @@ export default function Profile({ match }) {
 					</ListItem>
 					<Divider />
 					<ListItem>
-						<ListItemText primary={'Joined: ' + (new Date(user.created)).toDateString()}/>
+						<ListItemText secondary={'Joined: ' + (new Date(user.created)).toDateString()}/>
 					</ListItem>
 				</List>
 			</Paper>
