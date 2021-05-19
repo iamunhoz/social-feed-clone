@@ -22,17 +22,23 @@ const useStyles = makeStyles(theme => ({
 		maxWidth: 600,
 		margin: 'auto',
 		padding: theme.spacing(3),
-		marginTop: theme.spacing(5)
+		marginTop: theme.spacing(5),
+		backgroundColor: theme.palette.primary.main
 	}),
 	title: {
 		marginTop: theme.spacing(3),
 		color: theme.palette.protectedTitle
 	},
 	about: {
-		fontStyle: 'italic'
+		fontStyle: 'italic',
+		color: theme.palette.primary.contrastText
 	},
 	userInfo: {
-		maxWidth: '110px'
+		maxWidth: '110px',
+		color: theme.palette.primary.contrastText
+	},
+	joined: {
+		color: theme.palette.primary.contrastText
 	}
 }))
 
@@ -91,7 +97,7 @@ export default function Profile({ match }) {
 					</ListItem>
 					<Divider />
 					<ListItem>
-						<ListItemText secondary={'Joined: ' + (new Date(user.created)).toDateString()}/>
+						<ListItemText primary={'Joined: ' + (new Date(user.created)).toDateString()} className={classes.joined}/>
 					</ListItem>
 				</List>
 			</Paper>

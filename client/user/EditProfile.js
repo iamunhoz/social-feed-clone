@@ -10,6 +10,8 @@ import Icon from '@material-ui/core/Icon'
 import { makeStyles } from '@material-ui/core/styles'
 import { read, update } from './api-user'
 import { Redirect } from 'react-router-dom'
+import Avatar from '@material-ui/core/Avatar'
+import FileUpload from '@material-ui/icons/AddAPhoto'
 
 const useStyles = makeStyles(theme => {
 	return ({
@@ -18,11 +20,17 @@ const useStyles = makeStyles(theme => {
 			margin: 'auto',
 			textAlign: 'center',
 			marginTop: theme.spacing(5),
-			paddingBottom: theme.spacing(2)
+			paddingBottom: theme.spacing(2),
+			backgroundColor: theme.palette.primary.main
 		},
 		title: {
 			margin: theme.spacing(2),
 			color: theme.palette.protectedTitle
+		},
+		bigAvatar: {
+			width: 60,
+			height: 60,
+			margin: 'auto'
 		},
 		error: {
 			verticalAlign: 'middle'
@@ -30,11 +38,25 @@ const useStyles = makeStyles(theme => {
 		textField: {
 			marginLeft: theme.spacing(1),
 			marginRight: theme.spacing(1),
-			width: 300
+			width: 300,
+			'& > *': {
+				color: theme.palette.primary.contrastText
+			}
+		},
+		photoField: {
+			width: '50%',
+			margin: '0 auto'
 		},
 		submit: {
 			margin: 'auto',
 			marginBottom: theme.spacing(2)
+		},
+		inputFile: {
+			display: 'none'
+		},
+		filename: {
+			marginLeft: '10px',
+			color: theme.palette.primary.contrastText
 		}
 	})
 })
@@ -46,6 +68,7 @@ export default function EditProfile({ match }) {
 		email: '',
 		password: '',
 		about: '',
+		photo: '',
 		open: false,
 		error: '',
 		redirectToProfile: false
@@ -115,6 +138,27 @@ export default function EditProfile({ match }) {
 					<Typography variant='h6' className={classes.title}>
 						Edit Profile
 					</Typography>
+					<div className={classes.photoField}>
+						<input
+							accept='image/*'
+							type='file'
+							onChange={handleChange('photo')}
+							className={classes.inputFile}
+							id='icon-button-file'
+						/>
+						<label htmlFor='icon-button-file'>
+							<Button
+								variant='contained'
+								color='default'
+								component='span'>
+							Upload
+								<FileUpload />
+							</Button>
+						</label>
+						<span className={classes.filename}>
+							{values.photo ? values.photo.name : 'Insert photo'}
+						</span>
+					</div>
 					<TextField
 						id='name'
 						label='name'
@@ -122,6 +166,7 @@ export default function EditProfile({ match }) {
 						value={values.name}
 						onChange={handleChange('name')}
 						margin='normal'
+						color='secondary'
 					/><br/>
 					<TextField
 						id='email'
@@ -130,6 +175,7 @@ export default function EditProfile({ match }) {
 						value={values.email}
 						onChange={handleChange('email')}
 						margin='normal'
+						color='secondary'
 					/><br/>
 					<TextField
 						id='multiline-flexible'
@@ -140,6 +186,7 @@ export default function EditProfile({ match }) {
 						value={values.about}
 						onChange={handleChange('about')}
 						margin='normal'
+						color='secondary'
 					/><br/>
 					<TextField
 						id='password'
@@ -148,6 +195,7 @@ export default function EditProfile({ match }) {
 						value={values.password}
 						onChange={handleChange('password')}
 						margin='normal'
+						color='secondary'
 					/><br/>
 					{ values.error && (
 						<Typography component='p' color='error'>
