@@ -100,12 +100,13 @@ export default function EditProfile({ match }) {
 	}, [match.params.Id])
 
 	const clickSubmit = () => {
-		const user = {
-			name: values.name || undefined,
-			email: values.email || undefined,
-			password: values.password || undefined,
-			about: values.about || undefined
-		}
+		const user = new FormData()
+		values.name && user.append('name', values.name)
+		values.email && user.append('email', values.email)
+		values.password && user.append('password', values.password)
+		values.about && user.append('about', values.about)
+		values.photo && user.append('photo', values.photo)
+
 		update(
 			{ userId: match.params.userId },
 			{ t: jwt.token },
@@ -123,9 +124,13 @@ export default function EditProfile({ match }) {
 	}
 
 	const handleChange = name => event => {
+		const value =
+			name === 'photo'
+				? event.target.files[0]
+				: event.target.value
 		setValues({
 			...values,
-			[name]: event.target.value
+			[name]: value
 		})
 	}
 

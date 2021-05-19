@@ -10,7 +10,6 @@ import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import Edit from '@material-ui/icons/Edit'
-import Person from '@material-ui/icons/Person'
 import Divider from '@material-ui/core/Divider'
 import DeleteUser from './DeleteUser'
 import auth from './../auth/auth-helper'
@@ -67,6 +66,10 @@ export default function Profile({ match }) {
 		}
 	}, [match.params.userId])
 
+	const photoUrl = user._id ?
+		`/api/users/photo/${user._id}?${new Date().getTime()}` :
+		'/api/users/defaultphoto'
+
 	if (redirectToSignin) {
 		return <Redirect to='/signin' />
 	} else {
@@ -78,9 +81,7 @@ export default function Profile({ match }) {
 				<List dense>
 					<ListItem>
 						<ListItemAvatar>
-							<Avatar>
-								<Person />
-							</Avatar>
+							<Avatar src={photoUrl}/>
 						</ListItemAvatar>
 						<ListItemText primary={user.name} secondary={user.email} className={classes.userInfo} />
 						<ListItemText primary={user.about} className={classes.about} />

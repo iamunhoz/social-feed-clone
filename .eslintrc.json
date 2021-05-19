@@ -26,6 +26,7 @@
             "anonymous": "always",
             "named": "never",
             "asyncArrow": "always"
-        }]
+        }],
+		"multiline-ternary": "off"
     }
 }
