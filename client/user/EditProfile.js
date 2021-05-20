@@ -69,7 +69,7 @@ export default function EditProfile({ match }) {
 		password: '',
 		about: '',
 		photo: '',
-		open: false,
+		id: '',
 		error: '',
 		redirectToProfile: false
 	})
@@ -90,7 +90,8 @@ export default function EditProfile({ match }) {
 					...values,
 					name: data.name,
 					email: data.email,
-					about: data.about
+					about: data.about,
+					id: data._id
 				})
 			}
 		})
@@ -100,23 +101,23 @@ export default function EditProfile({ match }) {
 	}, [match.params.Id])
 
 	const clickSubmit = () => {
-		const user = new FormData()
-		values.name && user.append('name', values.name)
-		values.email && user.append('email', values.email)
-		values.password && user.append('password', values.password)
-		values.about && user.append('about', values.about)
-		values.photo && user.append('photo', values.photo)
+		let userData = new FormData()
+		values.name && userData.append('name', values.name)
+		values.email && userData.append('email', values.email)
+		values.password && userData.append('password', values.password)
+		values.about && userData.append('about', values.about)
+		values.photo && userData.append('photo', values.photo)
 
 		update(
 			{ userId: match.params.userId },
 			{ t: jwt.token },
-			user).then(data => {
+			userData
+		).then(data => {
 			if (data && data.error) {
 				setValues({ ...values, error: data.error })
 			} else {
 				setValues({
 					...values,
-					userId: data._id,
 					redirectToProfile: true
 				})
 			}
@@ -124,18 +125,22 @@ export default function EditProfile({ match }) {
 	}
 
 	const handleChange = name => event => {
-		const value =
-			name === 'photo'
-				? event.target.files[0]
-				: event.target.value
+		const value = name === 'photo'
+			? event.target.files[0]
+			: event.target.value
 		setValues({
 			...values,
 			[name]: value
 		})
 	}
 
+	const photoUrl = values.id ?
+		`/api/users/photo/${values.id}?${new Date().getTime()}`
+		:
+		'/api/users/defaultphoto'
+
 	if (values.redirectToProfile) {
-		return (<Redirect to={'/user/' + values.userId} />)
+		return (<Redirect to={'/user/' + values.id} />)
 	} else {
 		return (
 			<Card className={classes.card}>
@@ -143,6 +148,7 @@ export default function EditProfile({ match }) {
 					<Typography variant='h6' className={classes.title}>
 						Edit Profile
 					</Typography>
+					<Avatar src={photoUrl}/> <br/>
 					<div className={classes.photoField}>
 						<input
 							accept='image/*'

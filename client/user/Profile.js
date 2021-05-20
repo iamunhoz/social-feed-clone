@@ -15,6 +15,7 @@ import DeleteUser from './DeleteUser'
 import auth from './../auth/auth-helper'
 import { read } from './api-user'
 import { Redirect, Link } from 'react-router-dom'
+import FollowButton from './../user/FollowButton'
 
 const useStyles = makeStyles(theme => ({
 	root: theme.mixins.gutters({
@@ -36,28 +37,39 @@ const useStyles = makeStyles(theme => ({
 		maxWidth: '110px',
 		color: theme.palette.primary.contrastText
 	},
-	joined: {
+	contrastText: {
 		color: theme.palette.primary.contrastText
 	}
 }))
 
 export default function Profile({ match }) {
 	const classes = useStyles()
-	const [user, setUser] = useState({})
-	const [redirectToSignin, setRedirectToSignin] = useState(false)
+	// const [user, setUser] = useState({})
+	const [values, setValues] = useState({
+		user: {
+			following: [],
+			followers: []
+		},
+		redirecttoSignin: false,
+		following: false
+	})
+	// const [redirectToSignin, setRedirectToSignin] = useState(false)
 	const jwt = auth.isAuthenticated()
 
 	useEffect(() => {
 		const abortController = new AbortController()
 		const signal = abortController.signal
 
-		read({
-			userId: match.params.userId
-		}, { t: jwt.token }, signal).then((data) => {
+		read(
+			{ userId: match.params.userId },
+			{ t: jwt.token },
+			signal
+		).then(data => {
 			if (data && data.error) {
-				setRedirectToSignin(true)
+				setValues(...values, { redirecToSignin: true })
 			} else {
-				setUser(data)
+				const following = checkFollow(data)
+				setValues({ ...values, user: data, following: following })
 			}
 		})
 
@@ -66,39 +78,76 @@ export default function Profile({ match }) {
 		}
 	}, [match.params.userId])
 
-	const photoUrl = user._id ?
-		`/api/users/photo/${user._id}?${new Date().getTime()}` :
+	const clickFollowButton = callApi => {
+		callApi(
+			{ userId: jwt.user._id },
+			{ t: jwt.token },
+			values.user._id
+		).then(data => {
+			if (data.error) {
+				setValues({ ...values, error: data.error })
+			} else {
+				setValues({ ...values, user: data, following: !values.following })
+			}
+		})
+	}
+
+	const checkFollow = user => {
+		const match = user.followers.some(follower => {
+			return follower._id == jwt.user._id
+		})
+		return match
+	}
+
+	const photoUrl = values.user._id ?
+		`/api/users/photo/${values.user._id}?${new Date().getTime()}` :
 		'/api/users/defaultphoto'
 
-	if (redirectToSignin) {
+	if (values.redirectToSignin) {
 		return <Redirect to='/signin' />
 	} else {
 		return (
 			<Paper className={classes.root} elevation={4}>
-				<Typography variant='h6' className={classes.title}>
-					Profile
+				<Typography
+					variant='h6'
+					className={classes.title}>
+						Profile
 				</Typography>
 				<List dense>
 					<ListItem>
 						<ListItemAvatar>
 							<Avatar src={photoUrl}/>
 						</ListItemAvatar>
-						<ListItemText primary={user.name} secondary={user.email} className={classes.userInfo} />
-						<ListItemText primary={user.about} className={classes.about} />
-						{ auth.isAuthenticated().user && auth.isAuthenticated().user._id === user._id &&
+						<ListItemText
+							primary={values.user.name}
+							secondary={values.user.email}
+							className={classes.userInfo}
+						/>
+						<ListItemText
+							primary={values.user.about}
+							className={classes.about}
+						/>
+						{ auth.isAuthenticated().user && auth.isAuthenticated().user._id === values.user._id ?
 							(<ListItemSecondaryAction>
-								<Link to={'/user/edit/' + user._id}>
+								<Link to={'/user/edit/' + values.user._id}>
 									<IconButton arial-label='Edit' color='primary'>
-										<Edit />
+										<Edit className={classes.contrastText} />
 									</IconButton>
 								</Link>
-								<DeleteUser userId={user._id}/>
+								<DeleteUser userId={values.user._id}/>
 							</ListItemSecondaryAction>)
+							:
+							(
+								<FollowButton
+									following={values.following}
+									onButtonClick={clickFollowButton}
+								/>
+							)
 						}
 					</ListItem>
 					<Divider />
 					<ListItem>
-						<ListItemText primary={'Joined: ' + (new Date(user.created)).toDateString()} className={classes.joined}/>
+						<ListItemText primary={'Joined: ' + (new Date(values.user.created)).toDateString()} className={classes.contrastText}/>
 					</ListItem>
 				</List>
 			</Paper>

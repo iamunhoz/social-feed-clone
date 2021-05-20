@@ -31,6 +31,9 @@ const list = async (req, res) => {
 const userById = async (req, res, next, id) => {
 	try {
 		const user = await User.findById(id)
+			.populate('following', '_id name')
+			.populate('followers', '_id name')
+			.exec()
 		if (!user) {
 			return res.status(400).json({
 				error: 'User not found'
@@ -62,7 +65,7 @@ const update = async (req, res) => {
 			})
 		}
 		let user = req.profile
-		user = extend(user, req.body)
+		user = extend(user, fields)
 		user.updated = Date.now()
 		if (files.photo) {
 			user.photo.data = fs.readFileSync(files.photo.path)
@@ -107,6 +110,64 @@ const remove = async (req, res) => {
 	}
 }
 
+const addFollowing = async (req, res, next) => {
+	try {
+		await User.findByIdAndUpdate(
+			req.body.userId,
+			{ $push: { following: req.body.followId } }
+		)
+		next()
+	} catch (e) {
+		return res.status(400).json({ error: errorHandler.getErrorMessage(e) })
+	}
+}
+
+const addFollower = async (req, res) => {
+	try {
+		const result = await User.findByIdAndUpdate(
+			req.body.followId,
+			{ $push: { following: req.body.followId } },
+			{ new: true })
+			.populate('following', '_id name')
+			.populate('followers', '_id name')
+			.exec()
+		result.hashed_password = undefined
+		result.salt = undefined
+		res.json(result)
+	} catch (e) {
+		return res.status(400).json({ error: errorHandler.getErrorMessage(e) })
+	}
+}
+
+const removeFollowing = async (req, res, next) => {
+	try {
+		await User.findByIdAndUpdate(
+			req.body.userId,
+			{ $pull: { following: req.body.unfollowId } }
+		)
+		next()
+	} catch (e) {
+		return res.status(400).json({ error: errorHandler.getErrorMessage(e) })
+	}
+}
+
+const removeFollower = async (req, res) => {
+	try {
+		const result = await User.findByIdAndUpdate(
+			req.body.unfollowId,
+			{ $pull: { followers: req.body.userId } },
+			{ new: true })
+			.populate('following', '_id name')
+			.populate('followers', '_id name')
+			.exec()
+		result.hashed_password = undefined
+		result.salt = undefined
+		res.json(result)
+	} catch (e) {
+		return res.status(400).json({ error: errorHandler.getErrorMessage(e) })
+	}
+}
+
 export default {
 	create,
 	userById,
@@ -115,5 +176,9 @@ export default {
 	update,
 	remove,
 	photo,
-	defaultPhoto
+	defaultPhoto,
+	addFollowing,
+	addFollower,
+	removeFollowing,
+	removeFollower
 }
