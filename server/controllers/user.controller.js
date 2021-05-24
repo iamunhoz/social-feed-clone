@@ -30,7 +30,7 @@ const list = async (req, res) => {
 
 const userById = async (req, res, next, id) => {
 	try {
-		const user = await User.findById(id)
+		let user = await User.findById(id)
 			.populate('following', '_id name')
 			.populate('followers', '_id name')
 			.exec()
@@ -43,7 +43,7 @@ const userById = async (req, res, next, id) => {
 		next()
 	} catch (err) {
 		return res.status(400).json({
-			error: 'Could not retrieve user'
+			error: err
 		})
 	}
 }
@@ -88,8 +88,9 @@ const photo = (req, res, next) => {
 	if (req.profile.photo.data) {
 		res.set('Content-Type', req.profile.photo.contentType)
 		return res.send(req.profile.photo.data)
+	} else {
+		next()
 	}
-	next()
 } /* é invocado pelo user.routes.js */
 
 const defaultPhoto = (req, res) => {
@@ -118,7 +119,7 @@ const addFollowing = async (req, res, next) => {
 		)
 		next()
 	} catch (e) {
-		return res.status(400).json({ error: errorHandler.getErrorMessage(e) })
+		return res.status(409).json({ error: e })
 	}
 }
 
@@ -126,7 +127,7 @@ const addFollower = async (req, res) => {
 	try {
 		const result = await User.findByIdAndUpdate(
 			req.body.followId,
-			{ $push: { following: req.body.followId } },
+			{ $push: { followers: req.body.userId } },
 			{ new: true })
 			.populate('following', '_id name')
 			.populate('followers', '_id name')

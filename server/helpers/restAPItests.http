@@ -66,3 +66,13 @@ GET {{server}}/auth/signout HTTP/1.1
 ### asks -only- for /dist/bundle.js (express test)
 GET {{server}}/dist/bundle.js HTTP/1.1
 
+### asks to follow a user
+PUT {{server}}/api/users/follow
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGE4MmIyZTk1ZWUyODM5NGM1ZDVmZTgiLCJpYXQiOjE2MjE2MzM4NTN9.RXIej-G5sy1eiS7Wt5H_kTDITSQPJFwe4DXaikrVJ1Q
+
+{
+	"followId": "60941f282bb02d1b77cac56e",
+	"userId": "609a82be93f3c4b8a2172e7d"
+}

@@ -15,7 +15,7 @@ import DeleteUser from './DeleteUser'
 import auth from './../auth/auth-helper'
 import { read } from './api-user'
 import { Redirect, Link } from 'react-router-dom'
-import FollowButton from './../user/FollowButton'
+import FollowProfileButton from './../user/FollowProfileButton'
 
 const useStyles = makeStyles(theme => ({
 	root: theme.mixins.gutters({
@@ -44,16 +44,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function Profile({ match }) {
 	const classes = useStyles()
-	// const [user, setUser] = useState({})
 	const [values, setValues] = useState({
-		user: {
-			following: [],
-			followers: []
-		},
-		redirecttoSignin: false,
+		user: { following: [], followers: [] },
+		redirectToSignin: false,
 		following: false
 	})
-	// const [redirectToSignin, setRedirectToSignin] = useState(false)
 	const jwt = auth.isAuthenticated()
 
 	useEffect(() => {
@@ -138,7 +133,7 @@ export default function Profile({ match }) {
 							</ListItemSecondaryAction>)
 							:
 							(
-								<FollowButton
+								<FollowProfileButton
 									following={values.following}
 									onButtonClick={clickFollowButton}
 								/>

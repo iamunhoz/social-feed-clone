@@ -87,20 +87,17 @@ const follow = async (params, credentials, followId) => {
 				'Content-Type': 'application/json',
 				Authorization: 'Bearer ' + credentials.t
 			},
-			body: JSON.stringify({
-				userId: params.userId,
-				followId: followId
-			})
+			body: JSON.stringify({ userId: params.userId, followId: followId })
 		})
 		return await response.json()
-	} catch (e) {
-		console.log(e)
+	} catch (err) {
+		console.log(err)
 	}
 }
 
 const unfollow = async (params, credentials, unfollowId) => {
 	try {
-		const response = await fetch('/api/users/unfollow', {
+		const response = await fetch('/api/users/unfollow/', {
 			method: 'PUT',
 			headers: {
 				Accept: 'application/json',
