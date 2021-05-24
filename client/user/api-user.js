@@ -80,7 +80,7 @@ const remove = async (params, credentials) => {
 
 const follow = async (params, credentials, followId) => {
 	try {
-		const response = await fetch('/api/users/follow', {
+		const response = await fetch('/api/users/follow/', {
 			method: 'PUT',
 			headers: {
 				Accept: 'application/json',
