@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import AppBar from '@material-ui/core/AppBar'
 import Typography from '@material-ui/core/Typography'
+import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import FollowGrid from './FollowGrid'
-// import { Tabs } from '@material-ui/core'
-// import PostList from './../post/PostList'
+// import PostList from './../post/PostList' não foi feito ainda
 
 export default function ProfileTabs() {
   const [tab, setTab] = useState(0)
