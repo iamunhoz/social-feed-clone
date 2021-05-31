@@ -16,8 +16,8 @@ import auth from './../auth/auth-helper'
 import { read } from './api-user'
 import { Redirect, Link } from 'react-router-dom'
 import FollowProfileButton from './../user/FollowProfileButton'
-// import ProfileTabs from './ProfileTabs'
-// import { listByUser } from './../post/api-post'
+import ProfileTabs from './ProfileTabs'
+import { listByUser } from './../post/api-post'
 
 const useStyles = makeStyles(theme => ({
   root: theme.mixins.gutters({
@@ -54,7 +54,7 @@ export default function Profile({ match }) {
   })
   const [posts, setPosts] = useState([])
 
-/*   const loadPosts = (user) => {
+  const loadPosts = (user) => {
     listByUser(
       { userId: user },
       { t: jwt.token }
@@ -65,9 +65,9 @@ export default function Profile({ match }) {
         setPosts(data)
       }
     })
-  } */
+  }
 
-  const removePost = (post) => {
+  const removePost = post => {
     const updatedPosts = posts
     const index = updatedPosts.indexOf(post)
     updatedPosts.splice(index, 1)
@@ -88,7 +88,7 @@ export default function Profile({ match }) {
       } else {
         const following = checkFollow(data)
         setValues({ ...values, user: data, following: following })
-        // loadPosts(data._id)
+        loadPosts(data._id)
       }
     })
 
@@ -169,10 +169,10 @@ export default function Profile({ match }) {
             <ListItemText primary={'Joined: ' + (new Date(values.user.created)).toDateString()} className={classes.contrastText}/>
           </ListItem>
         </List>
-        
+        <ProfileTabs user={values.user} posts={posts} removePostUpdate={removePost} />
       </Paper>
     )
   }
 }
 
-const ProfileTabs = '<ProfileTabs user={values.user} posts={posts} removePostUpdate={removePost} />'
+const ProfileTabs = ''
