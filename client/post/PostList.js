@@ -17,6 +17,6 @@ export default function PostList (props) {
 }
 
 PostList.PropTypes = {
-  posts: Proptypes.array.isRequired,
+  posts: PropTypes.array.isRequired,
   removeUpdate: PropTypes.func.isRequired
 }

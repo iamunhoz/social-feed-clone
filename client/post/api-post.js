@@ -105,7 +105,7 @@ const unlike = async (params, credentials, postId) => {
 
 const comment = async (params, credentials, postId, comment) => {
   try {
-    let response = await fetch('/apit/posts/comment/', {
+    let response = await fetch('/api/posts/comment/', {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
@@ -126,7 +126,7 @@ const comment = async (params, credentials, postId, comment) => {
 
 const uncomment = async (params, credentials, postId, comment) => {
   try {
-    let response = await fetch('/apit/posts/uncomment/', {
+    let response = await fetch('/api/posts/uncomment/', {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
