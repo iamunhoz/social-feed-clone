@@ -32,7 +32,7 @@ const listByUser = async (params, credentials) => {
 
 const listNewsFeed = async (params, credentials, signal) => {
   try {
-    let response = fetch('/api/posts/feed/' + params.userId, {
+    let response = await fetch('/api/posts/feed/' + params.userId, {
       method: 'GET',
       signal: signal,
       headers: {

@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     right: theme.spacing(2)
   },
   snack: {
-    color: theme.pallete.protectedTitle
+    color: theme.palette.protectedTitle
   },
   viewButton: {
     verticalAlign: 'middle'
@@ -49,7 +49,7 @@ export default function FindPeople() {
   })
   const jwt = auth.isAuthenticated()
 
-  useEffetct(() => {
+  useEffect(() => {
     const abortController = new AbortController()
     const signal = abortController.signal
 

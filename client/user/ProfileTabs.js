@@ -7,7 +7,7 @@ import Tab from '@material-ui/core/Tab'
 import FollowGrid from './FollowGrid'
 import PostList from './../post/PostList'
 
-export default function ProfileTabs() {
+export default function ProfileTabs(props) {
   const [tab, setTab] = useState(0)
 
   const handleTabChange = (event, value) => {

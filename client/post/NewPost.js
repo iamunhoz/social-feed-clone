@@ -5,13 +5,13 @@ import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
 import CardActions from '@material-ui/core/CardActions'
 import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/Textfield'
+import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import Avatar from '@material-ui/core/Avatar'
 import Icon from '@material-ui/core/Icon'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
-import create from './api-post'
+import { create } from './api-post'
 import IconButton from '@material-ui/core/IconButton'
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
 
@@ -64,7 +64,7 @@ export default function NewPost(props) {
   const jwt = auth.isAuthenticated()
 
   useEffect(() => {
-    setValues({ ...values, user: auth.isAuthenticated.user })
+    setValues({ ...values, user: auth.isAuthenticated().user })
   }, [])
 
   const clickPost = () => {
@@ -153,6 +153,6 @@ export default function NewPost(props) {
   </div>)
 }
 
-NewPost.PropTypes = {
+NewPost.propTypes = {
   addUpdate: PropTypes.func.isRequired
 }
