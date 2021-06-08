@@ -110,7 +110,7 @@ export default function Comments(props) {
         }
         title={
           <TextField
-            onkeyDown={addComment}
+            onKeyDown={addComment}
             multiline
             value={text}
             onChange={handleChange}

@@ -50,19 +50,20 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function Post (props) {
+  const jwt = auth.isAuthenticated()
+  const checkLike = (likes) => {
+    let match = likes.indexOf(jwt.user._id) !== -1
+    return match
+  }
+    
   const [values, setValues] = useState({
     like: checkLike(props.post.likes),
     likes: props.post.likes.length,
     comments: props.post.comments
   })
   const classes = useStyles()
-  const jwt = auth.isAuthenticated()
   
-  const checkLike = (likes) => {
-    let match = likes.indexOf(jwt.user._id) !== -1
-    return match
-  }
-
+  
   const clickLike = () => {
     let callApi = values.like ? unlike : like
     callApi(
@@ -112,7 +113,7 @@ export default function Post (props) {
           </IconButton>
         }
         title={ 
-          <Link to={'/user/' + props.post.props._id}>
+          <Link to={'/user/' + props.post.postedBy._id}>
             {props.post.postedBy.name}
           </Link>
         }
