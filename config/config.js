@@ -1,11 +1,18 @@
-// mongoCredentials.js contains private password and is not synced with repo. Has to be recreated upon cloning
-import secrets from './.mongoCredentials.js'
+const secrets = {
+  user: process.env.MONGO_USER,
+  password: process.env.MONGO_PASSWORD,
+  uri: process.env.MONGO_URI,
+  defaultDb: process.env.MONGO_DEFAULT_DB,
+  jwt: process.env.JWT_SECRET
+}
+
+const mongoCredentials = `${secrets.user}:${secrets.pass}@${secrets.uri}/${secrets.defaultDb}`,
 
 const config = {
 	env: process.env.NODE_ENV || 'development',
-	port: 3001,
+	port: 8000,
 	jwtSecret: secrets.jwt,
-	mongoUri: 'mongodb+srv://' + secrets.mongoCredentials + '?retryWrites=true&w=majority'
+	mongoUri: 'mongodb+srv://' + mongoCredentials + '?retryWrites=true&w=majority'
 }
 
 export default config
