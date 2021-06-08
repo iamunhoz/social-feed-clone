@@ -23,10 +23,10 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 600,
     margin: 'auto',
     marginBottom: theme.spacing(3),
-    backgroundColor: 'rgba(0, 0, 0, 0.06'
+    backgroundColor: theme.palette.primary.main
   },
   cardContent: {
-    backgroundColor: 'white',
+    backgroundColor: theme.palette.primary.main,
     padding: `${theme.spacing(2)}px 0px`
   },
   cardHeader: {
@@ -34,7 +34,8 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: theme.spacing(1)
   },
   text: {
-    margin: theme.spacing(2)
+    margin: theme.spacing(2),
+    color: theme.palette.primary.contrastText
   },
   photo: {
     textAlign: 'center',

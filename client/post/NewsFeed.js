@@ -12,7 +12,8 @@ const useStyles = makeStyles(theme => ({
   card: {
     margin: 'auto',
     paddingTop: 0,
-    paddingBottom: theme.spacing(3)
+    paddingBottom: theme.spacing(3),
+    backgroundColor: theme.palette.primary.main
   },
   title: {
     padding: `${theme.spacing(3)}px ${theme.spacing(2.5)}px ${theme.spacing(2)}px`,
@@ -21,6 +22,9 @@ const useStyles = makeStyles(theme => ({
   },
   media: {
     minHeight: 330
+  },
+  divider: {
+    backgroundColor: `${theme.palette.primary.light} !important`
   }
 }))
 
@@ -66,7 +70,7 @@ export default function NewsFeed () {
         Newsfeed
       </Typography>
       <Divider />
-      <NewPost addUpdate={addPost} />
+      <NewPost addUpdate={addPost}/>
       <Divider />
       <PostList removeUpdate={removePost} posts={posts} />
     </Card>

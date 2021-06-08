@@ -17,36 +17,40 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: '#efefef',
+    backgroundColor: theme.palette.primary.main,
     padding: `${theme.spacing(3)}px 0px 1px`
   },
   card: {
     maxWidth: 600,
     margin: 'auto',
     marginBottom: theme.spacing(3),
-    backgroundColor: 'rgba( 65, 150, 136, 0.09',
+    backgroundColor: theme.palette.primary.main,
     boxShadow: 'none'
   },
   cardContent: {
-    backgroundColor: 'white',
+    backgroundColor: theme.palette.primary.main,
     paddingTop: 0,
     paddingBottom: 0
   },
   cardHeader: {
     paddingTop: 8,
-    paddingBottom: 8
+    paddingBottom: 8,
+    color: theme.palette.primary.contrastText
   },
   photoButton: {
     height: 30,
     marginBottom: 5
   },
   input: {
-    display: 'none'
+    display: 'none',
+    color: theme.palette.primary.contrastText
   },
   textField: {
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
-    width: '90%'
+    width: '90%',
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText
   },
   submit: {
     margin: theme.spacing(2)
@@ -140,7 +144,7 @@ export default function NewPost(props) {
       </CardContent>
       <CardActions>
         <Button
-          color='primary'
+          color='secondary'
           variant='contained'
           disabled={values.text === ''}
           onClick={clickPost}

@@ -19,8 +19,19 @@ const theme = createMuiTheme({
 		},
 		openTitle: '#fbec5d',
 		protectedTitle: green['400'],
-		type: 'light'
-	}
+		type: 'light',
+    divider: '#4d4d4d',
+    overrides: {
+      MuiInput: {
+        input: {
+          "&::placeholder": {
+            color: "gray"
+          },
+          color: "white", // if you also want to change the color of the input, this is the prop you'd use
+        }
+      }
+	  }
+  }
 })
 
 export default theme

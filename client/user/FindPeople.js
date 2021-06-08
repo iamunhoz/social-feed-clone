@@ -19,7 +19,8 @@ import ViewIcon from '@material-ui/icons/Visibility'
 const useStyles = makeStyles(theme => ({
   root: theme.mixins.gutters({
     padding: theme.spacing(1),
-    margin: 0
+    margin: 0,
+    backgroundColor: theme.palette.primary.main
   }),
   title: {
     margin: `${theme.spacing(3)}px ${theme.spacing(1)}px ${theme.spacing(2)}px`,
@@ -37,6 +38,9 @@ const useStyles = makeStyles(theme => ({
   },
   viewButton: {
     verticalAlign: 'middle'
+  },
+  userName: {
+    color: theme.palette.primary.contrastText
   }
 }))
 
@@ -103,7 +107,7 @@ export default function FindPeople() {
               <ListItemAvatar className={classes.avatar}>
                 <Avatar sr={'/api/users/photo/'+user._id}/>
               </ListItemAvatar>
-              <ListItemText primary={user.name}/>
+              <ListItemText primary={user.name} className={classes.userName}/>
               <ListItemSecondaryAction className={classes.follow}>
                 <Link to={'/user/' + user._id}>
                   <IconButton
@@ -117,7 +121,7 @@ export default function FindPeople() {
                 <Button
                   aria-label='Follow'
                   variant='contained'
-                  color='primary'
+                  color='secondary'
                   onClick={() => {clickFollow(user, i)}}
                 >
                   Follow
