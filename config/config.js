@@ -6,7 +6,7 @@ const secrets = {
   jwt: process.env.JWT_SECRET
 }
 
-const mongoCredentials = `${secrets.user}:${secrets.pass}@${secrets.uri}/${secrets.defaultDb}`
+const mongoCredentials = `${secrets.user}:${secrets.password}@${secrets.uri}/${secrets.defaultDb}`
 
 const config = {
 	env: process.env.NODE_ENV || 'development',

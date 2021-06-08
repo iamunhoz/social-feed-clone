@@ -1,5 +1,7 @@
 /node_modules/
-/dist/
+/dist/*js
+/dist/*jpg
+/dist/*png
 /data/
 npm-debug.log
 .mongoCredentials.js
