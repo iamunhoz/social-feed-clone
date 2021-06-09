@@ -10,7 +10,7 @@ const mongoCredentials = `${secrets.user}:${secrets.password}@${secrets.uri}/${s
 
 const config = {
 	env: process.env.NODE_ENV || 'development',
-	port: 8000,
+	port: process.env.PORT || 80,
 	jwtSecret: secrets.jwt,
 	mongoUri: 'mongodb+srv://' + mongoCredentials + '?retryWrites=true&w=majority'
 }
