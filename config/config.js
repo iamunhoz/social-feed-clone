@@ -5,7 +5,6 @@ const secrets = {
   defaultDb: process.env.MONGO_DEFAULT_DB,
   jwt: process.env.JWT_SECRET
 }
-
 const mongoCredentials = `${secrets.user}:${secrets.password}@${secrets.uri}/${secrets.defaultDb}`
 
 const config = {
