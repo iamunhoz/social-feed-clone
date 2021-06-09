@@ -19,7 +19,8 @@ const useStyles = makeStyles(theme => ({
 		backgroundColor: theme.palette.primary.dark,
 		width: '50%',
 		margin: '50px auto',
-		padding: '25px 0'
+		padding: '25px 0',
+    
 	},
 	title: {
 		color: theme.palette.openTitle,
@@ -57,7 +58,7 @@ export default function UserList() {
 		return function cleanup() {
 			abortController.abort()
 		}
-	}, []) /* In the second argument of this useEffect hook, we pass an empty array so that this effect cleanup runs only once upon mounting and unmounting, and not after every render */
+	}, [])
 
 	return (
 		<Paper className={classes.root} elevation={4}>

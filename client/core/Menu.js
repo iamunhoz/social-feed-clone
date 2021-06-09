@@ -6,10 +6,13 @@ import AppBar from '@material-ui/core/AppBar'
 import ToolBar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
-import HomeIcon from '@material-ui/icons/Home'
+// import HomeIcon from '@material-ui/icons/Home'
 import { makeStyles } from '@material-ui/core/styles'
+////import { SvgIcon } from '@material-ui/core'
+import agoraIcon from './../assets/images/agora.svg'
 
 import theme from './../theme'
+import AgoraIcon from './AgoraIcon'
 
 const isActive = (history, path) => {
 	if (history.location.pathname == path) { return { color: theme.palette.secondary.main } } else { return { color: '#ffffff' } }
@@ -19,7 +22,11 @@ const useStyles = makeStyles({
 	container: {
 		display: 'flex',
 		justifyContent: 'space-between'
-	}
+	},
+  appName: {
+    fontFamily: 'Berkshire Swash',
+    fontSize: '2.5rem'
+  }
 })
 
 const Menu = withRouter(({ history }) => {
@@ -29,22 +36,24 @@ const Menu = withRouter(({ history }) => {
 			<ToolBar className={classes.container}>
 				<Link to='/'>
 					<IconButton arial-label='Home' style={isActive(history, '/')}>
-						<HomeIcon/>
+						<AgoraIcon />
 					</IconButton>
 				</Link>
-				<Typography variant='h6' color='inherit'>
-					MERN skeleton
+				<Typography variant='h6' color='inherit' className={classes.appName}>
+					Agora
 				</Typography>
 				<div>
-					<Link to='/users'>
-						<Button style={isActive(history, '/users')}>Users</Button>
-					</Link>
+          {auth.isAuthenticated() &&
+            <Link to='/users'>
+              <Button style={isActive(history, '/users')}>Users</Button>
+            </Link>
+          }
 					{!auth.isAuthenticated() && (<span>
 						<Link to='/signup'>
 							<Button style={isActive(history, '/signup')}>Sign Up</Button>
 						</Link>
 						<Link to='/signin'>
-							<Button style={isActive(history, '/signin')}>Sign In</Button>
+							<Button style={isActive(history, '/signin')}>Log In</Button>
 						</Link>
 					</span>)}
 					{auth.isAuthenticated() && (<span>

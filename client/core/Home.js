@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card'
 import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
-import dancemacabre from './../assets/images/dancemacabre.jpg'
+import agoraPhoto from './../assets/images/agoraPhoto.jpg'
 import Grid from '@material-ui/core/Grid'
 import auth from './../auth/auth-helper'
 import FindPeople from './../user/FindPeople'
@@ -32,7 +32,9 @@ const useStyles = makeStyles(theme => ({
 		marginRight: 5
 	},
 	text: {
-		color: theme.palette.primary.contrastText
+		color: theme.palette.primary.contrastText,
+    fontFamily: 'Berkshire Swash',
+    
 	},
   credit: {
     padding: 10,
@@ -65,20 +67,23 @@ export default function Home({history}) {
             <Typography
             variant="h6"
             className={classes.title}
+            align='center'
             >
-              Home Page
+              Social Media for Classical People
             </Typography>
             <CardMedia
               className={classes.media}
-              image={dancemacabre}
-              title="Skeletons also dance"
+              image={agoraPhoto}
+              title="Agora is an ancient place for gatherings"
             />
             <CardContent>
               <Typography
               variant="h6"
               component="p"
-              className={classes.text}>
-                This is a MERN skeleton with CRUD capabilities
+              className={classes.text}
+              align='center'
+              >
+                A gathering point for meeting your old-timers
               </Typography>
             </CardContent>
           </Card>

@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles(theme => ({
   postBox: {
     marginTop: '24px',
-    backgroundColor: theme.palette.primary.dark
+    backgroundColor: theme.palette.primary.main
   }
 
 }))
