@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card'
 import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
-import dancemacabre from './../assets/images/dancemacabre.jpg'
+import agoraPhoto from './../assets/images/agoraPhoto.jpg'
 import Grid from '@material-ui/core/Grid'
 import auth from './../auth/auth-helper'
 import FindPeople from './../user/FindPeople'
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 		maxWidth: 600,
 		margin: 'auto',
 		marginTop: theme.spacing(5),
-		backgroundColor: theme.palette.primary.dark
+		backgroundColor: theme.palette.primary.main
 	},
 	title: {
 		padding: `${theme.spacing(3)}px ${theme.spacing(2.5)}px ${theme.spacing(2)}px`,
@@ -32,13 +32,15 @@ const useStyles = makeStyles(theme => ({
 		marginRight: 5
 	},
 	text: {
-		color: theme.palette.primary.contrastText
+		color: theme.palette.primary.contrastText,
+    fontFamily: 'Berkshire Swash',
+    
 	},
   credit: {
     padding: 10,
     textAlign: 'right',
     backgroundColor: '#ededed',
-    borderBottom: '1px solid #d0d0d0',
+    //borderBottom: '1px solid #d0d0d0',
     '& a':{
       color: '#3f4771'
     } 
@@ -62,23 +64,19 @@ export default function Home({history}) {
       <Grid container spacing={8}>
         <Grid item xs={12}>
           <Card className={classes.card}>
-            <Typography
-            variant="h6"
-            className={classes.title}
-            >
-              Home Page
-            </Typography>
             <CardMedia
               className={classes.media}
-              image={dancemacabre}
-              title="Skeletons also dance"
+              image={agoraPhoto}
+              title="Agora is an ancient place for gatherings"
             />
             <CardContent>
               <Typography
               variant="h6"
               component="p"
-              className={classes.text}>
-                This is a MERN skeleton with CRUD capabilities
+              className={classes.text}
+              align='center'
+              >
+                Agora is an ancient place for gatherings
               </Typography>
             </CardContent>
           </Card>

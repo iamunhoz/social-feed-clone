@@ -39,14 +39,26 @@ const useStyles = makeStyles(theme => ({
   },
   photo: {
     textAlign: 'center',
-    backgroundColor: '#f2f5f4',
-    padding: theme.spacing(1)
+    //backgroundColor: '#f2f5f4',
+    padding: theme.spacing(1),
+    '& *': {
+      border: '1px solid white',
+      borderRadius: '2px',
+      boxShadow: `1px 1px 2px ${theme.palette.primary.light}`
+    }
   },
   media: {
     height: 200
   },
   button: {
     margin: theme.spacing(1)
+  },
+  contrast: {
+    color: theme.palette.primary.contrastText
+  },
+  subHeader: {
+    color: theme.palette.primary.contrastText,
+    fontSize:'0.6em'
   }
 }))
 
@@ -102,7 +114,7 @@ export default function Post (props) {
   }
 
   return (
-    <Card className={classes.card}>
+    <Card className={`${classes.card} ${classes.contrast}`}>
       <CardHeader
         avatar={
           <Avatar src={'/api/users/photo/'+props.post.postedBy._id}/>
@@ -110,16 +122,20 @@ export default function Post (props) {
         action={
           props.post.postedBy._id === auth.isAuthenticated().user._id && 
           <IconButton onClick={deletePost}>
-            <DeleteIcon />
+            <DeleteIcon className={classes.contrast}/>
           </IconButton>
         }
         title={ 
-          <Link to={'/user/' + props.post.postedBy._id}>
+          <Link to={'/user/' + props.post.postedBy._id} className={classes.contrast}>
             {props.post.postedBy.name}
           </Link>
         }
-        subheader={(new Date(props.post.created)).toDateString()}
-        className={classes.cardHeader}
+        subheader={
+          <Typography className={classes.subHeader}>
+            {(new Date(props.post.created)).toDateString()}
+          </Typography>
+        }        
+        className={`${classes.cardHeader} ${classes.contrast}`}
       />
       <CardContent className={classes.cardContent}>
         <Typography component='p' className={classes.text}>

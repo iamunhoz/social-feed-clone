@@ -160,7 +160,7 @@ export default function EditProfile({ match }) {
 						<label htmlFor='icon-button-file'>
 							<Button
 								variant='contained'
-								color='default'
+								color='secondary'
 								component='span'>
 							Upload
 								<FileUpload />
@@ -218,7 +218,7 @@ export default function EditProfile({ match }) {
 				</CardContent>
 				<CardActions>
 					<Button
-						color='primary'
+						color='secondary'
 						variant='contained'
 						onClick={clickSubmit}
 						className={classes.submit}>

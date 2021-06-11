@@ -98,7 +98,7 @@ export default function FindPeople() {
   return ( <div>
     <Paper className={classes.root} elevation={4}>
       <Typography type='title' className={classes.title}>
-        People to follow
+        Philosophers to follow
       </Typography>
       <List>
         {values.users.map((user, i) => {
