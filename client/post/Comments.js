@@ -17,10 +17,13 @@ const useStyles = makeStyles(theme => ({
     height: 25
   },
   commentField: {
-    width: '96%'
+    width: '96%',
+    '& ::placeholder': {
+      color: theme.palette.primary.contrastText
+    }
   },
   commentText: {
-    backgroundColor: 'white',
+    backgroundColor: theme.palette.primary.main,
     padding: theme.spacing(1),
     margin: `2px ${theme.spacing(2)}px 2px 2px`
   },
@@ -33,6 +36,9 @@ const useStyles = makeStyles(theme => ({
    fontSize: '1.6em',
    verticalAlign: 'middle',
    cursor: 'pointer'
+ },
+ placeholder: {
+   color: theme.palette.primary.contrastText
  }
 }))
 
@@ -114,7 +120,8 @@ export default function Comments(props) {
             multiline
             value={text}
             onChange={handleChange}
-            placeholder="Penny for your thoughts"
+            placeholder=
+                "Penny for your thoughts"              
             className={classes.commentField}
             margin='normal'
           />

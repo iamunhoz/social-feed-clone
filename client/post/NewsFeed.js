@@ -13,6 +13,7 @@ const useStyles = makeStyles(theme => ({
     margin: 'auto',
     paddingTop: 0,
     paddingBottom: theme.spacing(3),
+    marginBottom: theme.spacing(4),
     backgroundColor: theme.palette.primary.main
   },
   title: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     minHeight: 330
   },
   divider: {
-    backgroundColor: `${theme.palette.primary.light} !important`
+    backgroundColor: theme.palette.primary.main
   }
 }))
 
@@ -65,14 +66,14 @@ export default function NewsFeed () {
     updatedPosts.splice(index, 1)
   }
   return (
-    <Card className={classes.card}>
-      <Typography type='title' className={classes.title}>
-        Newsfeed
-      </Typography>
-      <Divider />
-      <NewPost addUpdate={addPost}/>
-      <Divider />
-      <PostList removeUpdate={removePost} posts={posts} />
-    </Card>
+    <div>
+      <Card className={classes.card} elevation={4}>
+        <NewPost addUpdate={addPost}/>
+      </Card>
+      <Card className={classes.card} elevation={4}>
+        <PostList removeUpdate={removePost} posts={posts} />
+      </Card>
+    </div>
+
   )
 }

@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    background: theme.palette.background.paper
+    backgroundColor: theme.palette.primary.main
   },
   bigAvatar: {
     width: 60,
@@ -23,7 +23,8 @@ const useStyles = makeStyles(theme => ({
   },
   tileText: {
     textAlign: 'center',
-    marginTop: 10
+    marginTop: 10,
+    color: theme.palette.primary.contrastText
   }
 }))
 

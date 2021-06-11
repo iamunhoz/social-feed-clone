@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 		width: '50%',
 		margin: 'auto',
 		marginTop: theme.spacing(5),
-		backgroundColor: theme.palette.primary.dark,
+		backgroundColor: theme.palette.primary.main,
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center'
@@ -30,7 +30,17 @@ const useStyles = makeStyles(theme => ({
 		color: theme.palette.openTitle
 	},
 	textfield: {
-		color: theme.palette.primary.contrastText
+		color: theme.palette.primary.contrastText,
+    "& .MuiInputBase-input": {
+      color: theme.palette.primary.contrastText,
+      "& ::placeholder": {
+        color: theme.palette.primary.contrastText
+      }
+    },
+    "& .MuiFormLabel-root": {
+      color: theme.palette.primary.contrastText
+    }
+    
 	}
 }))
 
@@ -46,7 +56,7 @@ export default function Signup() {
 
 	const handleChange = field => event => {
 		setValues({ ...values, [field]: event.target.value })
-	} /* akes thenew value that's entered in the input field and sets it as the state. */
+	} 
 
 	const clickSubmit = () => {
 		const user = {
@@ -71,15 +81,35 @@ export default function Signup() {
 					<Typography variant='h6' className={classes.title}>
 						Sign Up
 					</Typography>
-					<TextField id='name' label='Name' className={classes.textfield}
-						value={values.name} onChange={handleChange('name')}
-						margin='normal' /> <br/>
-					<TextField id='email' label='Email' type='email' className={classes.textfield}
-						value={values.email} onChange={handleChange('email')}
-						margin='normal' /> <br/>
-					<TextField id='password' label='Password' type='password' className={classes.textfield}
-						value={values.password} onChange={handleChange('password')}
-						margin='normal' /> <br/>
+					<TextField
+            id='name'
+            label='Name'
+            className={classes.textfield}
+						value={values.name}
+            onChange={handleChange('name')}
+						margin='normal'
+          />
+          <br/>
+					<TextField
+            id='email'
+            label='Email'
+            type='email'
+            className={classes.textfield}
+						value={values.email}
+            onChange={handleChange('email')}
+						margin='normal'
+          />
+          <br/>
+					<TextField
+            id='password'
+            label='Password'
+            type='password'
+            className={classes.textfield}
+						value={values.password}
+            onChange={handleChange('password')}
+						margin='normal'
+          />
+          <br/>
 					{
 						values.error && (<Typography component='p' color='error'>
 							<Icon color='error' className={classes.error}>error</Icon>
@@ -87,8 +117,14 @@ export default function Signup() {
 					}
 				</CardContent>
 				<CardActions>
-					<Button color='primary' variant='contained' onClick={clickSubmit}
-						className={classes.submit}>Submit</Button>
+					<Button
+            color='secondary'
+            variant='contained'
+            onClick={clickSubmit}
+						className={classes.submit}
+          >
+            Submit
+          </Button>
 				</CardActions>
 			</Card>
 
