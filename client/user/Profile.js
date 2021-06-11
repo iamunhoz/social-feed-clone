@@ -37,7 +37,11 @@ const useStyles = makeStyles(theme => ({
   },
   userInfo: {
     maxWidth: '110px',
-    color: theme.palette.primary.contrastText
+    color: theme.palette.primary.contrastText,
+    '& .MuiTypography-colorTextSecondary': {
+      color: theme.palette.primary.contrastText,
+      fontSize: '0.6em'
+    }
   },
   contrastText: {
     color: theme.palette.primary.contrastText

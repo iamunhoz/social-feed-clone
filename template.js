@@ -19,7 +19,7 @@ export default ({markup, css}) => {
               body{
                 margin: 0;
                 min-height: 100vh;
-                background-color: #4d4d4d;
+                background-color: #212121;
               }
               #root{
                 min-height: 100vh;

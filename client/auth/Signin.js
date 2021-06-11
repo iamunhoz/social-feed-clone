@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 		textAlign: 'center',
 		marginTop: theme.spacing(5),
 		paddingBottom: theme.spacing(2),
-		backgroundColor: theme.palette.primary.dark
+		backgroundColor: theme.palette.primary.main
 	},
 	error: {
 		verticalAlign: 'middle'
@@ -31,11 +31,20 @@ const useStyles = makeStyles(theme => ({
 		marginLeft: theme.spacing(1),
 		marginRight: theme.spacing(1),
 		width: 300,
-		color: theme.palette.primary.contrastText
+		color: theme.palette.primary.contrastText,
+    "& .MuiInputBase-input": {
+      color: theme.palette.primary.contrastText,
+      "& ::placeholder": {
+        color: theme.palette.primary.contrastText
+      }
+    },
+    "& .MuiFormLabel-root": {
+      color: theme.palette.primary.contrastText
+    }
 	},
 	submit: {
 		margin: 'auto',
-		marginBotom: theme.spacing(2)
+		marginBottom: theme.spacing(2)
 	}
 }))
 
@@ -85,7 +94,7 @@ export default function Signin(props) {
 					id='email'
 					type='email'
 					label='Email'
-					className={classes.textfield}
+					className={classes.textField}
 					value={values.email}
 					onChange={handleChange('email')}
 					margin='normal'
@@ -94,7 +103,7 @@ export default function Signin(props) {
 					id='password'
 					type='password'
 					label='Password'
-					className={classes.textfield}
+					className={classes.textField}
 					value={values.password}
 					onChange={handleChange('password')}
 					margin='normal'
@@ -108,7 +117,7 @@ export default function Signin(props) {
 			</CardContent>
 			<CardActions>
 				<Button
-					color='primary'
+					color='secondary'
 					variant='contained'
 					onClick={clickSubmit}
 					className={classes.submit}>

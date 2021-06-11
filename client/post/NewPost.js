@@ -50,7 +50,10 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2),
     width: '90%',
     backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText
+    color: theme.palette.primary.contrastText,
+    '& ::placeholder': {
+      color: theme.palette.primary.contrastText
+    }
   },
   submit: {
     margin: theme.spacing(2)

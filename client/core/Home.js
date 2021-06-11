@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 		maxWidth: 600,
 		margin: 'auto',
 		marginTop: theme.spacing(5),
-		backgroundColor: theme.palette.primary.dark
+		backgroundColor: theme.palette.primary.main
 	},
 	title: {
 		padding: `${theme.spacing(3)}px ${theme.spacing(2.5)}px ${theme.spacing(2)}px`,
@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     padding: 10,
     textAlign: 'right',
     backgroundColor: '#ededed',
-    borderBottom: '1px solid #d0d0d0',
+    //borderBottom: '1px solid #d0d0d0',
     '& a':{
       color: '#3f4771'
     } 
@@ -64,13 +64,6 @@ export default function Home({history}) {
       <Grid container spacing={8}>
         <Grid item xs={12}>
           <Card className={classes.card}>
-            <Typography
-            variant="h6"
-            className={classes.title}
-            align='center'
-            >
-              Social Media for Classical People
-            </Typography>
             <CardMedia
               className={classes.media}
               image={agoraPhoto}
@@ -83,7 +76,7 @@ export default function Home({history}) {
               className={classes.text}
               align='center'
               >
-                A gathering point for meeting your old-timers
+                Agora is an ancient place for gatherings
               </Typography>
             </CardContent>
           </Card>

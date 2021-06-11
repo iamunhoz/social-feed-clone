@@ -16,7 +16,7 @@ import { list } from './api-user.js'
 
 const useStyles = makeStyles(theme => ({
 	root: {
-		backgroundColor: theme.palette.primary.dark,
+		backgroundColor: theme.palette.primary.main,
 		width: '50%',
 		margin: '50px auto',
 		padding: '25px 0',

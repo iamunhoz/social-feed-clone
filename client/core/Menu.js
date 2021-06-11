@@ -6,11 +6,8 @@ import AppBar from '@material-ui/core/AppBar'
 import ToolBar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
-// import HomeIcon from '@material-ui/icons/Home'
 import { makeStyles } from '@material-ui/core/styles'
-////import { SvgIcon } from '@material-ui/core'
 import agoraIcon from './../assets/images/agora.svg'
-
 import theme from './../theme'
 import AgoraIcon from './AgoraIcon'
 
@@ -34,18 +31,18 @@ const Menu = withRouter(({ history }) => {
 	return (
 		<AppBar position='static'>
 			<ToolBar className={classes.container}>
+				<Typography variant='h6' color='inherit' className={classes.appName}>
+					Agora
+				</Typography>
+				<div>
 				<Link to='/'>
 					<IconButton arial-label='Home' style={isActive(history, '/')}>
 						<AgoraIcon />
 					</IconButton>
 				</Link>
-				<Typography variant='h6' color='inherit' className={classes.appName}>
-					Agora
-				</Typography>
-				<div>
           {auth.isAuthenticated() &&
             <Link to='/users'>
-              <Button style={isActive(history, '/users')}>Users</Button>
+              <Button style={isActive(history, '/users')}>Philosophers</Button>
             </Link>
           }
 					{!auth.isAuthenticated() && (<span>
