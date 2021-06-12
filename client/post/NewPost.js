@@ -53,7 +53,10 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.contrastText,
     '& ::placeholder': {
       color: theme.palette.primary.contrastText
-    }
+    },
+    '& .MuiInput-root': {
+      color: theme.palette.primary.contrastText
+    },
   },
   submit: {
     margin: theme.spacing(2)

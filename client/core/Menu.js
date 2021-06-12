@@ -11,11 +11,7 @@ import agoraIcon from './../assets/images/agora.svg'
 import theme from './../theme'
 import AgoraIcon from './AgoraIcon'
 
-const isActive = (history, path) => {
-	if (history.location.pathname == path) { return { color: theme.palette.secondary.main } } else { return { color: '#ffffff' } }
-}
-
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
 	container: {
 		display: 'flex',
 		justifyContent: 'space-between'
@@ -24,10 +20,17 @@ const useStyles = makeStyles({
     fontFamily: 'Berkshire Swash',
     fontSize: '2.5rem'
   }
-})
+}))
 
 const Menu = withRouter(({ history }) => {
 	const classes = useStyles()
+  const isActive = (history, path) => {
+    if (history.location.pathname == path) {
+      return { color: theme.palette.secondary.main } 
+    } else {
+      return { color: '#ffffff' }
+    }
+  }
 	return (
 		<AppBar position='static'>
 			<ToolBar className={classes.container}>
@@ -35,11 +38,11 @@ const Menu = withRouter(({ history }) => {
 					Agora
 				</Typography>
 				<div>
-				<Link to='/'>
-					<IconButton arial-label='Home' style={isActive(history, '/')}>
-						<AgoraIcon />
-					</IconButton>
-				</Link>
+          <Link to='/'>
+            <IconButton arial-label='Home' style={isActive(history, '/')}>
+              <AgoraIcon />
+            </IconButton>
+          </Link>
           {auth.isAuthenticated() &&
             <Link to='/users'>
               <Button style={isActive(history, '/users')}>Philosophers</Button>

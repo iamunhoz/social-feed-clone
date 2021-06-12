@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card'
 import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
-import agoraPhoto from './../assets/images/agoraPhoto.jpg'
+import agoraPhoto from './../assets/images/agoraPhotoPB.jpg'
 import Grid from '@material-ui/core/Grid'
 import auth from './../auth/auth-helper'
 import FindPeople from './../user/FindPeople'
@@ -40,7 +40,6 @@ const useStyles = makeStyles(theme => ({
     padding: 10,
     textAlign: 'right',
     backgroundColor: '#ededed',
-    //borderBottom: '1px solid #d0d0d0',
     '& a':{
       color: '#3f4771'
     } 
