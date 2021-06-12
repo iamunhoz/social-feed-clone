@@ -3,9 +3,9 @@ import * as React from "react";
 function AgoraIcon() {
   return (
     <svg
-      height="1em"
+      height="2em"
       viewBox="0 0 512 512"
-      width="1em"
+      width="2em"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path d="M64 176h384v240H64z" fill="#4b464b" />

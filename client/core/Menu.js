@@ -10,6 +10,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import agoraIcon from './../assets/images/agora.svg'
 import theme from './../theme'
 import AgoraIcon from './AgoraIcon'
+import { Drawer, List, ListItem } from '@material-ui/core'
+import { useState } from 'react'
 
 const useStyles = makeStyles(theme => ({
 	container: {
@@ -19,10 +21,22 @@ const useStyles = makeStyles(theme => ({
   appName: {
     fontFamily: 'Berkshire Swash',
     fontSize: '2.5rem'
+  },
+  drawer: {
+    '& .MuiDrawer-paper': {
+      backgroundColor: theme.palette.primary.dark
+    }
+  },
+  button: {
+    color: theme.palette.primary.contrastText
   }
 }))
 
 const Menu = withRouter(({ history }) => {
+  const [drawerState, setDrawerState] = useState(false)
+  const toggleDrawer = open => event => {
+    setDrawerState(open)
+  }
 	const classes = useStyles()
   const isActive = (history, path) => {
     if (history.location.pathname == path) {
@@ -37,36 +51,96 @@ const Menu = withRouter(({ history }) => {
 				<Typography variant='h6' color='inherit' className={classes.appName}>
 					Agora
 				</Typography>
-				<div>
-          <Link to='/'>
-            <IconButton arial-label='Home' style={isActive(history, '/')}>
-              <AgoraIcon />
-            </IconButton>
-          </Link>
-          {auth.isAuthenticated() &&
-            <Link to='/users'>
-              <Button style={isActive(history, '/users')}>Philosophers</Button>
-            </Link>
-          }
-					{!auth.isAuthenticated() && (<span>
-						<Link to='/signup'>
-							<Button style={isActive(history, '/signup')}>Sign Up</Button>
-						</Link>
-						<Link to='/signin'>
-							<Button style={isActive(history, '/signin')}>Log In</Button>
-						</Link>
-					</span>)}
-					{auth.isAuthenticated() && (<span>
-						<Link to={'/user/' + auth.isAuthenticated().user._id}>
-							<Button style={isActive(history, '/user' + auth.isAuthenticated().user._id)}>
-					My Profile
-							</Button>
-						</Link>
-						<Button color='inherit' onClick={() => {
-							auth.clearJwt(() => history.push('/'))
-						}}> Sign Out </Button>
-					</span>)}
-				</div>
+                
+        <Button onClick={toggleDrawer(true)}><AgoraIcon /></Button>
+				<Drawer
+          className={classes.drawer}
+          anchor='right'
+          open={drawerState}
+          onClose={toggleDrawer(false)}        
+        >
+          <List>
+            <ListItem>
+              <Link to='/'>
+                <Button
+                  onClick={toggleDrawer(false)}
+                  arial-label='Home'
+                  style={isActive(history, '/')}>
+                  
+                  {auth.isAuthenticated() ? 'Feed' : 'Home'}
+                
+                </Button>
+              </Link>
+            </ListItem>
+              {auth.isAuthenticated() && (
+                <ListItem>
+                    <Link to='/users'>
+                      <Button
+                        onClick={toggleDrawer(false)}
+                        style={isActive(history, '/users')}>
+                          
+                          Philosophers
+                          
+                      </Button>
+                    </Link>
+                </ListItem>
+              )}
+              {!auth.isAuthenticated() && (
+                <ListItem>
+                  <Link to='/signup'>
+                    <Button
+                      onClick={toggleDrawer(false)}
+                      style={isActive(history, '/signup')}>
+                        
+                        Sign Up
+                        
+                    </Button>
+                  </Link>
+                </ListItem>
+              )}
+              {!auth.isAuthenticated() && (
+                <ListItem>
+                  <Link to='/signin'>
+                    <Button
+                      onClick={toggleDrawer(false)}
+                      style={isActive(history, '/signin')}>
+                        
+                        Log In
+                        
+                    </Button>
+                  </Link>
+                </ListItem>
+              )}
+              {auth.isAuthenticated() && (
+                <ListItem>
+                  <Link to={'/user/' + auth.isAuthenticated().user._id}>
+                    <Button
+                      onClick={toggleDrawer(false)}
+                      style={isActive(history, '/user' + auth.isAuthenticated().user._id)}>
+                      
+                      My Profile
+
+                    </Button>
+                  </Link>
+                </ListItem>
+              )}              
+              {auth.isAuthenticated() && (
+                <ListItem>
+                  <Button
+                    className={classes.button}
+                    onClick={() => {
+                      auth.clearJwt(() => {
+                        toggleDrawer(false)
+                        return history.push('/')})
+                    }}>
+                      
+                      Sign Out
+                      
+                  </Button>
+                </ListItem>
+              )}
+          </List>
+				</Drawer>
 			</ToolBar>
 		</AppBar>
 	)
