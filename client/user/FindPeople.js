@@ -18,20 +18,20 @@ import ViewIcon from '@material-ui/icons/Visibility'
 
 const useStyles = makeStyles(theme => ({
   root: theme.mixins.gutters({
-    padding: theme.spacing(1),
+    padding: '0 0 0 0'/* theme.spacing(1) */,
     margin: 0,
     backgroundColor: theme.palette.primary.main
   }),
   title: {
-    margin: `${theme.spacing(3)}px ${theme.spacing(1)}px ${theme.spacing(2)}px`,
+    margin: `1px 1px 1px 1px`,
     color: theme.palette.openTitle,
     fontSize: '1em'
   },
   avatar: {
-    marginRight: theme.spacing(1)
+    marginRight: 0
   },
   follow: {
-    right: theme.spacing(2)
+    right: 0
   },
   snack: {
     color: theme.palette.protectedTitle
@@ -104,24 +104,19 @@ export default function FindPeople() {
         {values.users.map((user, i) => {
           return <span key={i}>
             <ListItem>
-              <ListItemAvatar className={classes.avatar}>
-                <Avatar sr={'/api/users/photo/'+user._id}/>
-              </ListItemAvatar>
+              <Link to={'/user/' + user._id}>
+                <ListItemAvatar className={classes.avatar}>
+                  <Avatar sr={'/api/users/photo/'+user._id}/>
+                </ListItemAvatar>
+              </Link>
               <ListItemText primary={user.name} className={classes.userName}/>
               <ListItemSecondaryAction className={classes.follow}>
-                <Link to={'/user/' + user._id}>
-                  <IconButton
-                    variant='contained'
-                    color='secondary'
-                    className={classes.viewButton}
-                  >
-                    <ViewIcon />
-                  </IconButton>
-                </Link>
+
                 <Button
                   aria-label='Follow'
                   variant='contained'
                   color='secondary'
+                  size='small'
                   onClick={() => {clickFollow(user, i)}}
                 >
                   Follow

@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid'
 import auth from './../auth/auth-helper'
 import FindPeople from './../user/FindPeople'
 import NewsFeed from './../post/NewsFeed'
+import MediaQuery from 'react-responsive'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -84,12 +85,14 @@ export default function Home({history}) {
     }
     { defaultPage &&
       <Grid container spacing={8}>
-        <Grid item xs={8} sm={7}>
+        <Grid item xs >
           <NewsFeed/>
         </Grid>
+        <MediaQuery minWidth={720}>
         <Grid item xs={6} sm={5}>
           <FindPeople/>
         </Grid>
+        </MediaQuery>
       </Grid>
     }
 		
