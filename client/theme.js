@@ -27,7 +27,7 @@ const theme = createMuiTheme({
           "&::placeholder": {
             color: "gray"
           },
-          color: "white", // if you also want to change the color of the input, this is the prop you'd use
+          color: "white"
         }
       }
 	  }

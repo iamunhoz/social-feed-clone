@@ -16,20 +16,3 @@ const config = {
 
 export default config
 
-/*  /config/.mongoCredentials.js
-
-const mongoCredentials = {
-    user: 'name',
-    pass: 'word',
-    uri: 'xxxxx.yyyyyy.mongodb.net',
-    defaultDb: 'db-name'
-}
-
-const secrets = {
-    mongoCredentials: `${mongoCredentials.user}:${mongoCredentials.pass}@${mongoCredentials.uri}/${mongoCredentials.defaultDb}`,
-    jwt: 'secretWord'
-
-}
-
-export default secrets
-*/

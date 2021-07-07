@@ -39,7 +39,6 @@ const useStyles = makeStyles(theme => ({
   },
   photo: {
     textAlign: 'center',
-    //backgroundColor: '#f2f5f4',
     padding: theme.spacing(1),
     '& *': {
       border: '1px solid white',
